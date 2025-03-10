@@ -4,9 +4,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../db/index');
 const {validateSignupInputs, validateSigninInputs} = require('../middleware/validateInputs');
+const {validateUniqueEmail} = require('../middleware/user');
 const router = new Router();
 
-router.post('/signup', validateSignupInputs, async (req, res) => {
+router.post('/signup', validateSignupInputs, validateUniqueEmail, async (req, res) => {
     const {firstName, lastName, email, password} = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 

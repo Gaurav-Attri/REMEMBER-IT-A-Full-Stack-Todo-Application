@@ -1,4 +1,5 @@
 require('dotenv').config();
+const {User} = require('../db/index');
 const jwt = require('jsonwebtoken');
 
 function userAuthentication(req, res, next){
@@ -17,6 +18,26 @@ function userAuthentication(req, res, next){
     }
 }
 
-module.export = {
-    userAuthentication
+async function validateUniqueEmail(req, res, next){
+    try{
+        const {email} = req.body;
+        const user = await User.findOne({email: email});
+        if(user){
+            return res.status(409).json({
+                msg: "Email already in use"
+            });
+        }
+        next();
+    }
+    catch(err){
+        return res.status(500).json({
+            msg: "Internal Server error, please try again later"
+        });
+    }
+
+}
+
+module.exports = {
+    userAuthentication,
+    validateUniqueEmail
 }
