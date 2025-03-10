@@ -21,6 +21,11 @@ const signupSchema = zod.object({
     password: passwordSchema
 });
 
+const singinSchema = zod.object({
+    email: emailSchema,
+    password: passwordSchema
+});
+
 function validateSignupInputs(req, res, next){
     const signupValidate = signupSchema.safeParse(req.body)
 
@@ -34,4 +39,20 @@ function validateSignupInputs(req, res, next){
     }
 }
 
-module.exports = validateSignupInputs
+function validateSigninInputs(req, res, next){
+    const signinValidate = singinSchema.safeParse(req.body);
+
+    if(!signinValidate){
+        return res.status(400).json({
+            error: signinValidate.error.format()
+        });
+    }
+    else{
+        next();
+    }
+}
+
+module.exports = {
+    validateSignupInputs,
+    validateSigninInputs
+}

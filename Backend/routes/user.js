@@ -1,7 +1,9 @@
+require("dotenv").config();
 const { Router } = require('express');
-const { User } = require('../db/index');
 const bcrypt = require('bcrypt');
-const validateSignupInputs = require('../middleware/validateInputs');
+const jwt = require('jsonwebtoken');
+const { User } = require('../db/index');
+const {validateSignupInputs, validateSigninInputs} = require('../middleware/validateInputs');
 const router = new Router();
 
 router.post('/signup', validateSignupInputs, async (req, res) => {
@@ -27,4 +29,26 @@ router.post('/signup', validateSignupInputs, async (req, res) => {
     }
 });
 
+router.post('/signin', validateSigninInputs, async (req, res) => {
+    const {email, password} = req.body;
+    const user = await User.findOne({email: email});
+    if(!user){
+        return res.status(401).json({
+            msg: "Invalid Credentials"
+        });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if(!passwordMatch){
+        return res.status(401).json({
+            msg: "Invalid Password"
+        });
+    }
+
+    const token = jwt.sign({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email}, process.env.JWT_SECRET);
+    return res.json({token});
+})
 module.exports = router;

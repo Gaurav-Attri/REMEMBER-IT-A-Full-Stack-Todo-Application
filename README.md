@@ -31,7 +31,7 @@
     - *Output*: {msg: "User Created Successfully"}  
 -  **POST - user/signin**  
     - *Body Input*: {email, password}
-    - *Output*: {token: jwtToken}  
+    - *Output*: {token: jwtToken, firstName, lastName}  
 ### Todo Routes  
 -  **POST - todo/create**  
     - *Body Input*: {title, description}
