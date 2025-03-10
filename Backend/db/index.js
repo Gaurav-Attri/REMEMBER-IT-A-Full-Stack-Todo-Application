@@ -20,8 +20,8 @@ const todoSchema = new mongoose.Schema({
     Status: Boolean,
 });
 
-const User =  mongoose.Model("User", User);
-const Todo = mongoose.Model("Todo", Todo);
+const User =  mongoose.model("User", userSchema);
+const Todo = mongoose.model("Todo", todoSchema);
 
 module.exports = {
     User,
