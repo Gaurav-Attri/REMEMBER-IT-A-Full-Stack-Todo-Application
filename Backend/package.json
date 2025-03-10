@@ -1,0 +1,22 @@
+{
+  "name": "remember-it-backend",
+  "version": "1.0.0",
+  "description": "The backend of a full stack todo application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gaurav-Attri/REMEMBER-IT-A-Full-Stack-Todo-Application.git"
+  },
+  "keywords": [
+    "Todo Application",
+    "Task-Management Application"
+  ],
+  "author": "Gaurav Chaudhary",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gaurav-Attri/REMEMBER-IT-A-Full-Stack-Todo-Application/issues"
+  }
+}
