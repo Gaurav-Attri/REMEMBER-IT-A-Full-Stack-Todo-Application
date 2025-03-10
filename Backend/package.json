@@ -20,6 +20,7 @@
     "url": "https://github.com/Gaurav-Attri/REMEMBER-IT-A-Full-Stack-Todo-Application/issues"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.12.1",
