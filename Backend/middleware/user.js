@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 
 function userAuthentication(req, res, next){
     const {authorization} = req.headers;
+    if(!authorization) return res.status(401).json({
+        msg: "Unauthorized access is not allowed"
+    })
     const tokenParts = authorization.split(" ");
     const jwtToken = tokenParts[1];
     try{

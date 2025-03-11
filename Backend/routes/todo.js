@@ -47,7 +47,7 @@ router.get('/allTodos', userAuthentication, async (req, res) => {
         return res.json({todos: todosList});
     }
     catch(err){
-        console.log(err);
+        console.error(err);
         return res.status(500).json({
             msg: "Something is up with the server, please try again later"
         });
