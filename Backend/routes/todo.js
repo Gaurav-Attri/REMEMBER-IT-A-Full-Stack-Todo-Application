@@ -33,4 +33,25 @@ router.post('/create', userAuthentication, async (req, res) => {
     }
 });
 
+router.get('/allTodos', userAuthentication, async (req, res) => {
+    const {email} = req;
+
+    try{
+        const user = await User.findOne({email: email});
+        const todosList = await Todo.find({
+            _id: {
+                "$in": user.todosCreated
+            }
+        });
+
+        return res.json({todos: todosList});
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json({
+            msg: "Something is up with the server, please try again later"
+        });
+    }
+});
+
 module.exports = router;
