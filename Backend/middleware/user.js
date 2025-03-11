@@ -3,8 +3,8 @@ const {User} = require('../db/index');
 const jwt = require('jsonwebtoken');
 
 function userAuthentication(req, res, next){
-    const {token} = req.headers;
-    const tokenParts = token.split(" ");
+    const {authorization} = req.headers;
+    const tokenParts = authorization.split(" ");
     const jwtToken = tokenParts[1];
     try{
         const decoded = jwt.verify(jwtToken, process.env.JWT_SECRET);
