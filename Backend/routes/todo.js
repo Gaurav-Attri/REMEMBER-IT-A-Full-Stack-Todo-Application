@@ -91,4 +91,35 @@ router.put('/update', userAuthentication, async (req, res) => {
 
 });
 
+router.delete('/delete', userAuthentication, async (req, res) => {
+    const todoId = new mongoose.Types.ObjectId(String(req.body.todoId));
+    const {email} = req;
+    try{
+        const user = await User.findOne({email: email});
+        const todosCreated = user.todosCreated;
+
+        if(todosCreated.includes(todoId)){
+            await Todo.deleteOne({_id: todoId});
+            await User.updateOne({email: email}, {
+                "$pull": {
+                    todosCreated: todoId
+                }
+            });
+            return res.status(200).json({
+                msg: "Todo deleted successfully"
+            });
+        }
+        return res.status(401).json({
+            msg: "You can't delete somebody else's todo"
+        });
+        
+    }
+    catch(err){
+        console.error(err);
+        return res.status(500).json({
+            msg: "Something is up with the server, please try again later"
+        });
+    }
+});
+
 module.exports = router;
