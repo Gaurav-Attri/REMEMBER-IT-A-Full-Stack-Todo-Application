@@ -30,7 +30,7 @@ function validateSignupInputs(req, res, next){
     const signupValidate = signupSchema.safeParse(req.body)
     if(!signupValidate.success){
         return res.status(400).json({
-            erros: Object.values(signupValidate.error.format())
+            errors: Object.values(signupValidate.error.format())
                     .flatMap(err => err._errors)
                     .filter(Boolean)
         });
