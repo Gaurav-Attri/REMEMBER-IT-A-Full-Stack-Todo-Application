@@ -28,10 +28,11 @@ const singinSchema = zod.object({
 
 function validateSignupInputs(req, res, next){
     const signupValidate = signupSchema.safeParse(req.body)
-
     if(!signupValidate.success){
         return res.status(400).json({
-            error: signupValidate.error.format()
+            erros: Object.values(signupValidate.error.format())
+                    .flatMap(err => err._errors)
+                    .filter(Boolean)
         });
     }
     else{
