@@ -4,8 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/Frontend/Dashboard/dashboard.js" defer></script>
 </head>
 <body>
-    <h1>Dashboard</h1>
+    <h1 id="logo-heading">Remember IT!!</h1>
+    <h2 id="greeting-heading">Hello, </h2>
+    <div id="todo-input-container">
+        <input class="input-boxes" type="text" id="title" name="title" placeholder="Todo Title">
+        <input class="input-boxes" type="text" id="description" name="description" placeholder="Todo Description">
+        <button id="add-todo-button" onclick="addTodo()">Add Todo</button>
+    </div>
+    <div id="todo-container">
+        <h3 id="your-todos-heading">Your Todos</h3>
+        <ul id="todos-list">
+            <li>
+                <h3>Sample title</h3>
+                <p>Sample description</p>
+                <button id="done">Done</button>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>

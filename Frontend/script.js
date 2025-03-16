@@ -54,6 +54,7 @@ async function signIn(){
     }
 
     else{
+        localStorage.setItem("token", responseJson.token);
         window.location.href = "/Frontend/Dashboard/index.html"
     }
 
