@@ -56,7 +56,7 @@ router.get('/allTodos', userAuthentication, async (req, res) => {
 });
 
 router.put('/update', userAuthentication, async (req, res) => {
-    const {title, description, status} = req.body;
+    const {status} = req.body;
     const todoId = new mongoose.Types.ObjectId(String(req.body.todoId));
     const {email} = req;
 
@@ -66,8 +66,8 @@ router.put('/update', userAuthentication, async (req, res) => {
 
         if(todosCreated.includes(todoId)){
             await Todo.updateOne({_id: todoId}, {
-                title: title,
-                description: description,
+                // title: title,
+                // description: description,
                 status: status
             });
             return res.status(200).json({
