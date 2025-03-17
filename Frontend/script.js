@@ -26,7 +26,7 @@ async function signUp(){
         alert(responseJson.errors.join("\n"));
     }
     else{
-        window.location.href = "/Frontend/Dashboard/index.html"
+        window.location.href = "/Frontend/Signin/index.html"
     }
 
 }
