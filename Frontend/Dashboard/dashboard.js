@@ -1,4 +1,13 @@
+function getUserInfo(){
+    const token = localStorage.getItem("token");
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    const user = getUserInfo();
+    const greetingHeading = document.getElementById("greeting-heading");
+    greetingHeading.innerHTML = greetingHeading.innerHTML + ` ${user.firstName}`;
     loadTodos();
 })
 let id = 1;
